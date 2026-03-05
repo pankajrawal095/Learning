@@ -1,0 +1,80 @@
+managed implementation in class zbp_i_pankaj_travel unique;
+strict ( 2 );
+with collaborative draft;
+
+define behavior for YI_Pankaj_tRAVEL  alias Travel//alias <alias_name>
+persistent table zrap_atrav
+draft table zrap_atrav_d query YI_Pankaj_tRAVEL_d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Discard;
+  draft action Resume;
+  draft action Activate optimized;
+  draft determine action Prepare;
+  draft action Share;
+
+
+
+
+  field ( readonly, numbering : managed ) TravelUuid;
+  association _Booking { create; }
+  mapping for zrap_atrav corresponding
+  {
+  AgencyId = agency_id;
+  BeginDate = begin_date;
+  BookingFee = booking_fee;
+  CreatedAt = created_at;
+  CreatedBy = created_by;
+  CurrencyCode = currency_code;
+  CustomerId = customer_id;
+  Description = description;
+  EndDate = end_date;
+  LastChangedAt = last_changed_at;
+  LastChangedBy = last_changed_by;
+  LocalLastChangedAt = local_last_changed_at;
+  OverallStatus = overall_status;
+  TotalPrice =  total_price;
+  TravelId = travel_id;
+  TravelUuid= travel_uuid;
+
+  }
+}
+
+define behavior for YI_Pankaj_Booking alias Booking//alias <alias_name>
+persistent table zrap_abook
+draft table zrap_abook_d
+lock dependent by _Travel
+authorization dependent by _Travel
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) TravelUuid;
+  field ( readonly, numbering : managed ) BookingUuid;
+  association _Travel{with draft;}
+  mapping for zrap_abook corresponding
+  {
+  BookingDate = booking_date;
+  BookingId = booking_id;
+  BookingUuid = booking_uuid;
+  CarrierId = carrier_id;
+  ConnectionId = connection_id;
+  CreatedBy  = created_by;
+  CurrencyCode  = currency_code;
+  CustomerId = customer_id;
+  FlightDate = flight_date;
+  FlightPrice  = flight_price;
+  LastChangedBy = last_changed_by;
+  LocalLastChangedAt = local_last_changed_at;
+  TravelUuid = travel_uuid;
+
+  }
+}

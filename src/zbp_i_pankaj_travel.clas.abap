@@ -1,0 +1,5 @@
+CLASS zbp_i_pankaj_travel DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF yi_pankaj_travel.
+ENDCLASS.
+
+CLASS zbp_i_pankaj_travel IMPLEMENTATION.
+ENDCLASS.

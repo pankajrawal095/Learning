@@ -1,0 +1,6 @@
+@EndUserText.label: 'Travel Serviuce Defination'
+@ObjectModel.leadingEntity.name: 'YC_RAP_TRAVEL_V'
+define service YSRV_DEF_TRAVEL {
+  expose YC_RAP_TRAVEL_V  as travel;
+  expose YC_RAP_BOOKING_V as booking;
+}
